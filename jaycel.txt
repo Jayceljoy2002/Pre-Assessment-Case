@@ -1,0 +1,191 @@
+import java.util.*;
+
+
+
+
+public class Main {
+  
+	
+	
+	
+   public static void main(String args[]){
+	   
+ 
+
+
+
+CRUD a=new PreAssess();
+a.main();
+
+
+
+
+   }
+}
+ class  CRUD{
+	
+	 
+	public void main() {
+	try {	
+		int code;
+		String name,employee,type;
+		Scanner sc=new Scanner(System.in);
+		List<PreAssess> in=new ArrayList<PreAssess>();
+	Iterator<PreAssess>	inn=in.iterator();
+		int i=6;
+		
+		do {
+			System.out.println("1. Add");
+			System.out.println("2. View ");
+			System.out.println("3. Edit");
+			System.out.println("4. Delete");
+			System.out.println("5. Report");
+			System.out.println("6. Exit");
+			System.out.print("Enter Your Choice : ");
+	         i=sc.nextInt();
+			
+			
+			switch(i) {
+	
+			case 1:  
+				
+				System.out.println("Enter Barcode : ");
+				code=sc.nextInt();
+				System.out.println("Enter Name Of the Device : ");
+				name=sc.next();
+				System.out.println("Enter Employee Name : ");
+				employee=sc.next();
+				System.out.println("Enter Peripheral Type  :");
+				type=sc.next();
+						
+	      
+	        PreAssess n=new PreAssess(code,name,employee,type);
+	        in.add(n);
+				
+				break;
+			case 2:
+			
+				System.out.println("---------------------------------------------------");
+				
+				inn=in.iterator();
+				
+				while(inn.hasNext()) {
+					System.out.println(inn.next().ShowDetails());				}
+				System.out.println("---------------------------------------------------");
+				break;
+			case 3:
+				
+				boolean True=false;
+				
+				 ListIterator<PreAssess> jay=in.listIterator();
+				
+				System.out.println("Enter The Bar Code :");
+				code=sc.nextInt();
+				while(jay.hasNext()) {
+					PreAssess pre=jay.next();
+					if(pre.Code()==code) {
+						
+						System.out.println("Enter Barcode : ");
+						code=sc.nextInt();
+						System.out.println("Enter Name Of the Device : ");
+						name=sc.next();
+						System.out.println("Enter Employee Name : ");
+						employee=sc.next();
+						System.out.println("Enter Type Of Peripheral :");
+						type=sc.next();
+						
+						jay.set(new PreAssess(code,name,employee,type));
+						True=true;
+						
+if(!True) {						
+	System.out.println("Not Found");
+}else {
+	System.out.println("Success");
+}
+						
+						
+					}
+				}
+				
+				
+				
+				
+				
+				break;
+				
+			case 4:
+				
+				inn=in.iterator();
+				System.out.println("Enter The Code To Delete : ");
+				code=sc.nextInt();
+				boolean truth=false;
+				while(inn.hasNext()) {
+					PreAssess g=inn.next();
+					if(g.Code()==code) {
+						inn.remove();
+						truth=true;
+					}
+				}
+			
+				
+				if(!truth) {
+					System.out.println("The Code Didn't Match, Please Try Again!!!!");
+				}else {
+					System.out.println("It is Deleted Successfuly!!!!!!!!!!");
+				}
+				
+				break;
+				
+			case 5:
+				
+				while(inn.hasNext()) {
+					System.out.println(inn.next().ShowDetails());
+				}
+				break;
+				
+			case 6:
+				System.out.println("===========================================");
+				System.out.println("The Program is Finally Exit Thank You!!!!!");
+				System.out.println("===========================================");
+				break;
+			
+			}
+		}while(i!=6);
+	}catch(Exception e) {
+		System.out.println("Please Enetr Number Only");
+	}
+	}
+}
+	
+
+ 
+
+ 
+class PreAssess extends CRUD{
+	
+	int code;
+	String name,employee,type;
+	
+	PreAssess (int code,String name,String employee,String type){
+		this.code=code;
+		this.name=name;
+		this.employee=employee;
+		this.type=type;
+	}
+	public int Code() {
+		return code;
+	}
+	
+	
+	public String ShowDetails() {
+	
+		return "Code Bar: "+code+"\n"+"Name :"+name+"\n"+"Employee : "+employee+"\n"+"Type Of Pheriperal : "+type;
+	}
+	
+	PreAssess(){
+		
+	}
+	
+	
+}
+
